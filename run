@@ -1,0 +1,5 @@
+#!/bin/bash
+
+mkdir build
+
+g++ -o build/main window.cpp feladat.cpp -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 && ./build/main
