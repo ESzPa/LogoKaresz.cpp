@@ -1,6 +1,5 @@
 #include "feladat.hpp"
-#include "karesz.hpp"
-
+#include "moves.hpp"
 
 void Feladat(){
 

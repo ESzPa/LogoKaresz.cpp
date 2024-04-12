@@ -1,5 +1,6 @@
 #include "karesz.hpp"
 #include <string>
+#include <cmath>
 
 kareszprop karesz;
 
@@ -21,4 +22,9 @@ void MoveKaresz(int x, int y){
     }
     karesz.x = newx;
     karesz.y = newy;
+}
+
+void Előre(int n){
+    karesz.x = karesz.x + n * std::cos(karesz.headto);
+    karesz.y = karesz.y + n * std::sin(karesz.headto);
 }
