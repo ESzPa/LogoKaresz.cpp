@@ -11,7 +11,7 @@ typedef struct window{
 
 windowprop window;
 
-//void WinUpdate();
+void WinUpdate();
 void WinDraw();
 
 int main(){
@@ -20,17 +20,19 @@ int main(){
     KareszInit();
 
     while(!WindowShouldClose()){
-        //WinUpdate();
+        WinUpdate();
         WinDraw();
     }
 
     CloseWindow();
 }
-/*
+
 void WinUpdate(){
-    
+    if(IsKeyDown(KEY_W)){
+        MoveKaresz(karesz.x, karesz.y-5);
+    }
 }
-*/
+
 void WinDraw(){
     BeginDrawing();
 
@@ -46,6 +48,9 @@ void WinDraw(){
     DrawText(std::to_string(karesz.x).c_str(), 1250, 200, fontsize, BLACK);
     DrawText(std::to_string(karesz.y).c_str(), 1250, 250, fontsize, BLACK);
     DrawText(std::to_string(karesz.headto).c_str(), 1250, 300, fontsize, BLACK);
+
+    // Draw karesz
+    DrawTexture(karesz.texture, karesz.x-(karesz.texture.width/2)+25, karesz.y-(karesz.texture.height/2)+25, WHITE);
 
     EndDrawing();
 }
