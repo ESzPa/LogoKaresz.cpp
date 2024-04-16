@@ -2,4 +2,4 @@
 
 mkdir -p build
 
-g++ -o build/main karesz.cpp feladat.cpp window.cpp -Wall -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 && ./build/main
+g++ -o build/main karesz.cpp feladat.cpp window.cpp draw.cpp -Wall -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 && ./build/main

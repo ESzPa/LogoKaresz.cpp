@@ -2,7 +2,7 @@
 #include "moves.hpp"
 
 void Feladat(){
-
+    Előre(100);
 }
 
 

@@ -1,4 +1,5 @@
 #include "karesz.hpp"
+#include "draw.hpp"
 #include <string>
 #include <cmath>
 
@@ -25,6 +26,9 @@ void MoveKaresz(int x, int y){
 }
 
 void Előre(int n){
-    karesz.x = karesz.x + n * std::cos(karesz.headto);
-    karesz.y = karesz.y + n * std::sin(karesz.headto);
+    float dx = std::cos(karesz.headto - PI/2) * n;
+    float dy = std::sin(karesz.headto - PI/2) * n; 
+    karesz.x += static_cast<int>(dx); 
+    karesz.y += static_cast<int>(dy);
+    WinDraw();
 }
