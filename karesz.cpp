@@ -76,6 +76,14 @@ void Fordulj(int n){
     WinDraw();
 }
 
+void Jobbra(int n){
+    Fordulj(n);
+}
+
+void Balra(int n){
+    Fordulj(-n);
+}
+
 void Tollatfel(){
     karesz.pen = false;
 }
