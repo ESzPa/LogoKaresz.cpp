@@ -3,6 +3,13 @@
 #include <string>
 #include <cmath>
 
+//util
+int MathSign(int n){
+    if(n > 0){ return 1; }
+    if(n < 0){ return -1; }
+    return 0;
+}
+
 kareszprop karesz;
 
 // X: 1175
@@ -82,6 +89,20 @@ void Jobbra(int n){
 
 void Balra(int n){
     Fordulj(-n);
+}
+
+//from the original logokaresz
+void Ív(double degree, double r){
+    int unit = MathSign(degree);
+    double a = 2 * r * std::tan(PI / 360);
+    Előre(a / 2);
+    for (int i = 0; i < std::abs(degree) - 1; i++)
+    {
+        Jobbra(unit);
+        Előre(a);
+    }
+    Jobbra(unit);
+    Előre(a / 2);
 }
 
 void Tollatfel(){
