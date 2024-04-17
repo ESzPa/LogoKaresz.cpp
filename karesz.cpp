@@ -56,3 +56,11 @@ void Fordulj(int n){
     }
     WinDraw();
 }
+
+void Tollatfel(){
+    karesz.pen = false;
+}
+
+void Tollatle(){
+    karesz.pen = true;
+}

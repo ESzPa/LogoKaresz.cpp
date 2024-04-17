@@ -16,7 +16,7 @@ Rectangle startbtn = {1250, 25, 325, 125};
 
 int main(){
     InitWindow(window.width, window.height, window.name.c_str());
-    SetTargetFPS(30);
+    SetTargetFPS(60);
     KareszInit();
 
     while(!CheckCollisionPointRec(GetMousePosition(), startbtn) && !IsMouseButtonPressed(KEY_LEFT)){
