@@ -10,7 +10,7 @@ kareszprop karesz;
 void KareszInit(){
     Image texture = LoadImage("resources/karesz.png");
     ImageResize(&texture, 35, 35);
-    karesz = {580, 480, 0};
+    karesz = {580, 480, 0, true};
     karesz.texture = LoadTextureFromImage(texture);
     UnloadImage(texture);
 }
@@ -26,9 +26,30 @@ void MoveKaresz(int x, int y){
 }
 
 void Előre(int n){
-    float dx = std::cos(karesz.headto - PI/2) * n;
-    float dy = std::sin(karesz.headto - PI/2) * n; 
+    int oldx = karesz.x;
+    int oldy = karesz.y;
+    float angleRad = (90 - karesz.headto) * PI / 180.0;
+    float dx = std::cos(angleRad) * n;
+    float dy = std::sin(angleRad) * n; 
     karesz.x += static_cast<int>(dx); 
-    karesz.y += static_cast<int>(dy);
+    karesz.y -= static_cast<int>(dy);
+    if(karesz.pen){
+        std::vector<int> _; {oldx, oldy, karesz.x, karesz.y};
+        _.push_back(old)
+        linescoords.push_back(_);
+    }
+    WinDraw();
+}
+
+void Fordulj(int n){
+    if(karesz.headto + n > 360){
+        karesz.headto += n - 360;
+    }
+    else if(karesz.headto + n < 0){
+        karesz.headto += n + 360;
+    }
+    else{
+        karesz.headto += n;
+    }
     WinDraw();
 }

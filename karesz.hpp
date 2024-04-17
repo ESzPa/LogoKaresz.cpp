@@ -7,6 +7,7 @@ typedef struct kareszprop{
     int x;
     int y;
     int headto;
+    bool pen;
     Texture2D texture;
 }kareszprop;
 
