@@ -8,6 +8,7 @@ typedef struct kareszprop{
     int y;
     int headto;
     bool pen;
+    bool didteleport;
     Texture2D texture;
 }kareszprop;
 

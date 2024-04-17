@@ -17,7 +17,7 @@ kareszprop karesz;
 void KareszInit(){
     Image texture = LoadImage("resources/karesz.png");
     ImageResize(&texture, 35, 35);
-    karesz = {580, 480, 0, true};
+    karesz = {580, 480, 0, true, false};
     karesz.texture = LoadTextureFromImage(texture);
     UnloadImage(texture);
 }
@@ -30,6 +30,16 @@ void MoveKaresz(int x, int y){
     }
     karesz.x = newx;
     karesz.y = newy;
+}
+
+void Teleport(int x, int y, int dir){
+    if(karesz.didteleport){
+        return;
+    }
+    karesz.x = x;
+    karesz.y = y;
+    karesz.headto = dir;
+    WinDraw();
 }
 
 void Előre(int n){
