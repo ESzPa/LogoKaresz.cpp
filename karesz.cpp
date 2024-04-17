@@ -34,8 +34,11 @@ void Előre(int n){
     karesz.x += static_cast<int>(dx); 
     karesz.y -= static_cast<int>(dy);
     if(karesz.pen){
-        std::vector<int> _; {oldx, oldy, karesz.x, karesz.y};
-        _.push_back(old)
+        std::vector<int> _;
+        _.push_back(oldx);
+        _.push_back(oldy);
+        _.push_back(karesz.x);
+        _.push_back(karesz.y);
         linescoords.push_back(_);
     }
     WinDraw();

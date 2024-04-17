@@ -7,7 +7,7 @@
 
 extern Rectangle startbtn;
 
-extern std::vector<int[4]> linescoords;
+extern std::vector<std::vector<int>> linescoords;
 
 void WinDraw();
 
