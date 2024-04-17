@@ -29,9 +29,9 @@ void WinDraw(){
 
     // Draw karesz with rotation
     Rectangle sourceRec = { 0.0f, 0.0f, (float)karesz.texture.width, (float)karesz.texture.height };
-    Rectangle destRec = { karesz.x - (karesz.texture.width / 2) + 25, karesz.y - (karesz.texture.height / 2) + 25,
+    Rectangle destRec = { static_cast<float>(karesz.x - (karesz.texture.width / 2) + 25), static_cast<float>(karesz.y - (karesz.texture.height / 2) + 25),
                           (float)karesz.texture.width, (float)karesz.texture.height };
-    Vector2 origin = { karesz.texture.width / 2, karesz.texture.height / 2 };
+    Vector2 origin = { static_cast<float>(karesz.texture.width / 2), static_cast<float>(karesz.texture.height / 2) };
     DrawTexturePro(karesz.texture, sourceRec, destRec, origin, karesz.headto, WHITE);
 
     EndDrawing();
