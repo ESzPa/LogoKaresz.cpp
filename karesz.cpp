@@ -62,22 +62,7 @@ void Előre(int n){
 }
 
 void Hátra(int n){
-    int oldx = karesz.x;
-    int oldy = karesz.y;
-    float angleRad = (90 - karesz.headto) * PI / 180.0;
-    float dx = std::cos(angleRad) * n;
-    float dy = std::sin(angleRad) * n; 
-    karesz.x -= static_cast<int>(dx); 
-    karesz.y += static_cast<int>(dy);
-    if(karesz.pen){
-        std::vector<int> _;
-        _.push_back(oldx);
-        _.push_back(oldy);
-        _.push_back(karesz.x);
-        _.push_back(karesz.y);
-        linescoords.push_back(_);
-    }
-    WinDraw();
+    Előre(-n);
 }
 
 void Fordulj(int n){
