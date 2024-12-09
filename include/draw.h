@@ -1,6 +1,6 @@
-#ifndef DRAW_HPP
-#define DRAW_HPP
-#include "karesz.hpp"
+#ifndef DRAW_H
+#define DRAW_H
+#include "karesz.h"
 #include "raylib.h"
 #include <string>
 #include <vector>

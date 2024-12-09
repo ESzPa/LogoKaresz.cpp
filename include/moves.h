@@ -1,5 +1,5 @@
-#ifndef MOVES_HPP
-#define MOVES_HPP
+#ifndef MOVES_H
+#define MOVES_H
 
 void Teleport(int x, int y, int dir);
 void Előre(int n);

@@ -1,5 +1,5 @@
-#ifndef KARESZ_HPP
-#define KARESZ_HPP
+#ifndef KARESZ_H
+#define KARESZ_H
 #include <string>
 #include "raylib.h"
 

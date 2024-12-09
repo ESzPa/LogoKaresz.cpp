@@ -1,5 +1,5 @@
-#include "feladat.hpp"
-#include "karesz.hpp"
+#include "feladat.h"
+#include "karesz.h"
 #include "raylib.h"
 #include "draw.hpp"
 #include <string>

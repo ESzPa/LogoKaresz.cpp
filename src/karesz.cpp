@@ -1,5 +1,5 @@
-#include "karesz.hpp"
-#include "draw.hpp"
+#include "karesz.h"
+#include "draw.h"
 #include <string>
 #include <cmath>
 

@@ -1,4 +1,4 @@
-#include "karesz.hpp"
+#include "karesz.h"
 #include "raylib.h"
 #include <string>
 #include <vector>
