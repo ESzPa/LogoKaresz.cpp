@@ -1,7 +1,7 @@
 #include "feladat.h"
 #include "karesz.h"
-#include "raylib.h"
-#include "draw.hpp"
+#include "draw.h"
+#include <raylib.h>
 #include <string>
 
 typedef struct window{

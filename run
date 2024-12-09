@@ -1,5 +1,11 @@
 #!/bin/bash
 
-mkdir -p build
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd $SCRIPT_DIR
 
-g++ -o build/main draw.cpp karesz.cpp feladat.cpp window.cpp -Wall -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 && ./build/main
+mkdir -p build
+cd build
+
+cmake .. -G Ninja
+ninja 
+./logokaresz
