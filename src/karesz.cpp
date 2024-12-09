@@ -15,7 +15,7 @@ kareszprop karesz;
 // X: 1175
 // Y: 925
 void KareszInit(){
-    Image texture = LoadImage("resources/karesz.png");
+    Image texture = LoadImage("../assets/karesz.png");
     ImageResize(&texture, 35, 35);
     karesz = {580, 480, 0, true, false};
     karesz.texture = LoadTextureFromImage(texture);
