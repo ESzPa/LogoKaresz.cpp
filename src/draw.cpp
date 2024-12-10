@@ -30,8 +30,10 @@ Texture2D Map_t::getTexture() { return this->texture; }
 void Map_t::updateTexture() { UpdateTexture(this->texture, this->image.data); }
 
 Map_t map;
+bool shouldReDraw = true;
 
 void WinDraw(){
+    if(!shouldReDraw) return;
     BeginDrawing();
 
     ClearBackground({ 230, 230, 230, 255 });

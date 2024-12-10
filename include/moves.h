@@ -10,5 +10,6 @@ void Balra(int n);
 void Ív(double degree, double r);
 void Tollatfel();
 void Tollatle();
+void Frissíts(bool should);
 
 #endif

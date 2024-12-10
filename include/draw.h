@@ -9,6 +9,8 @@
 
 //extern Rectangle startbtn;
 
+
+
 class Map_t{
 private:
     int width;
@@ -26,6 +28,7 @@ public:
 };
 
 extern Map_t map;
+extern bool shouldReDraw;
 
 void WinDraw();
 

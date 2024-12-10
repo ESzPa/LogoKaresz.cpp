@@ -17,7 +17,9 @@ int main(){
     while(!CheckCollisionPointRec(GetMousePosition(), startbtn) && !IsMouseButtonPressed(KEY_LEFT)){
         WinDraw();
     }
+    
     Feladat();
+    shouldReDraw = true;
 
     while (!WindowShouldClose()){
         WinDraw();

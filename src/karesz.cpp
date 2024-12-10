@@ -131,3 +131,6 @@ void Ív(double degree, double r){
     karesz.Turn(unit);
     karesz.Forward(a / 2);
 }
+void Frissíts(bool should){
+    shouldReDraw = should;
+}
