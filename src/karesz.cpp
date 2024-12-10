@@ -1,7 +1,5 @@
 #include "karesz.h"
-#include "draw.h"
-#include <string>
-#include <cmath>
+#include "moves.h"
 
 //util
 int MathSign(int n){
@@ -10,100 +8,106 @@ int MathSign(int n){
     return 0;
 }
 
-kareszprop karesz;
+void Karesz_t::Init(Vector2 pos, int startHeading, bool startPen, bool hasTeleported, const char* texture){
+    this->x = pos.x;
+    this->y = pos.y;
+    this->heading = startHeading;
+    this->pendown = startPen;
+    this->teleported = hasTeleported;
 
-// X: 1175
-// Y: 925
-void KareszInit(){
-    Image texture = LoadImage("../assets/karesz.png");
-    ImageResize(&texture, 35, 35);
-    karesz = {580, 480, 0, true, false};
-    karesz.texture = LoadTextureFromImage(texture);
-    UnloadImage(texture);
+    // Loading the texture
+    Image tmpImg = LoadImage(texture);
+    ImageResize(&tmpImg, 30, 30);
+    this->texture = LoadTextureFromImage(tmpImg);
+    UnloadImage(tmpImg);
 }
 
-void MoveKaresz(int x, int y){
-    int newx = x;
-    int newy = y;
-    if(newx > 1200 || newy > 950 || newx < 25 || newy < 25){
-        return;
+bool Karesz_t::HasTeleported() const { return this->teleported; }
+
+Vector2 Karesz_t::Position() const { return (Vector2){(float)this->x, (float)this->y}; }
+
+int Karesz_t::Heading() const { return this->heading; }
+
+Texture2D Karesz_t::getTexture() const { return this->texture; }
+
+void Karesz_t::Move(int x, int y){
+    if(x > 1200 || y > 950 || x < 25 || y < 25){
+        throw std::runtime_error("Karesz has exceeded the boundaries of its allowed area.");
     }
-    karesz.x = newx;
-    karesz.y = newy;
+    this->x = x;
+    this->y = y;
 }
 
-void Teleport(int x, int y, int dir){
-    if(karesz.didteleport){
-        return;
+void Karesz_t::Teleport(int x, int y, int heading){
+    if(this->teleported){
+        throw std::runtime_error("Karesz has already teleported once.");
     }
-    karesz.x = x;
-    karesz.y = y;
-    karesz.headto = dir;
+    this->Move(x, y);
+    this->heading = heading;
     WinDraw();
 }
 
-void Előre(int n){
-    int oldx = karesz.x;
-    int oldy = karesz.y;
-    float angleRad = (90 - karesz.headto) * PI / 180.0;
-    float dx = std::cos(angleRad) * n;
-    float dy = std::sin(angleRad) * n; 
-    karesz.x += static_cast<int>(dx); 
-    karesz.y -= static_cast<int>(dy);
-    if(karesz.pen){
+void Karesz_t::Forward(int n){
+    int oldX = this->x;
+    int oldY = this->y;
+    float rad = (90 - this->heading) * PI / 180.0;
+    float dx = std::cos(rad) * n;
+    float dy = std::sin(rad) * n;
+    this->Move(this->x+(int)dx, this->y-(int)dy);
+    if(this->pendown){
         std::vector<int> _;
-        _.push_back(oldx);
-        _.push_back(oldy);
-        _.push_back(karesz.x);
-        _.push_back(karesz.y);
-        linescoords.push_back(_);
+        _.push_back(oldX);
+        _.push_back(oldY);
+        _.push_back(this->x);
+        _.push_back(this->y);
+        linescoords.push_back(_);  
     }
     WinDraw();
 }
 
-void Hátra(int n){
-    Előre(-n);
+void Karesz_t::Backward(int n){
+    this->Forward(-n);
 }
 
-void Fordulj(int n){
-    if(karesz.headto + n > 360){
-        karesz.headto += n - 360;
+void Karesz_t::Turn(int n){
+    if(this->heading + n > 360){
+        this->heading += n - 360;
     }
-    else if(karesz.headto + n < 0){
-        karesz.headto += n + 360;
+    else if(this->heading + n < 0){
+        this->heading += n + 360;
     }
     else{
-        karesz.headto += n;
+        this->heading += n;
     }
     WinDraw();
 }
 
-void Jobbra(int n){
-    Fordulj(n);
+void Karesz_t::PenUp(){
+    this->pendown = false;
 }
 
-void Balra(int n){
-    Fordulj(-n);
+void Karesz_t::PenDown(){
+    this->pendown = true;
 }
 
-//from the original logokaresz
+Karesz_t karesz;
+
+void Teleport(int x, int y, int heading) { karesz.Teleport(x, y, heading); }
+void Előre(int n) { karesz.Forward(n); }
+void Hátra(int n) { karesz.Backward(n); }
+void Fordulj(int n) { karesz.Turn(n); }
+void Jobbra(int n) { karesz.Turn(n); }
+void Balra(int n) { karesz.Turn(-n); }
+void Tollatfel() { karesz.PenUp(); }
+void Tollatle() { karesz.PenDown(); }
 void Ív(double degree, double r){
     int unit = MathSign(degree);
     double a = 2 * r * std::tan(PI / 360);
-    Előre(a / 2);
-    for (int i = 0; i < std::abs(degree) - 1; i++)
-    {
-        Jobbra(unit);
-        Előre(a);
+    karesz.Forward(a / 2);
+    for (int i = 0; i < std::abs(degree) - 1; i++){
+        karesz.Turn(unit);
+        karesz.Forward(a);
     }
-    Jobbra(unit);
-    Előre(a / 2);
-}
-
-void Tollatfel(){
-    karesz.pen = false;
-}
-
-void Tollatle(){
-    karesz.pen = true;
+    karesz.Turn(unit);
+    karesz.Forward(a / 2);
 }

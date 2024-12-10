@@ -1,9 +1,10 @@
 #ifndef DRAW_H
 #define DRAW_H
-#include "karesz.h"
-#include "raylib.h"
+#include <raylib.h>
 #include <string>
 #include <vector>
+
+#include "karesz.h"
 
 extern Rectangle startbtn;
 

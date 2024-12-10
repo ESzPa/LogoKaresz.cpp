@@ -1,7 +1,7 @@
 #ifndef MOVES_H
 #define MOVES_H
 
-void Teleport(int x, int y, int dir);
+void Teleport(int x, int y, int heading);
 void Előre(int n);
 void Hátra(int in);
 void Fordulj(int n);

@@ -7,5 +7,6 @@ mkdir -p build
 cd build
 
 cmake .. -G Ninja
-ninja 
-./logokaresz
+if ninja; then
+    ./logokaresz
+fi

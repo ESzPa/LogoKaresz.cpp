@@ -1,20 +1,38 @@
 #ifndef KARESZ_H
 #define KARESZ_H
-#include <string>
-#include "raylib.h"
+#include <raylib.h>
+#include <stdexcept>
+#include <cmath>
+#include <memory>
 
-typedef struct kareszprop{
+#include "draw.h"
+
+class Karesz_t{
+private:
     int x;
     int y;
-    int headto;
-    bool pen;
-    bool didteleport;
+    int heading;
+    bool pendown;
+    bool teleported;
     Texture2D texture;
-}kareszprop;
 
-extern kareszprop karesz;
+    void Move(int x, int y);
+public:
+    void Init(Vector2 pos, int startHeading, bool startPen, bool hasTeleported, const char* texture);
 
-void KareszInit();
-void MoveKaresz(int x, int y);
+    bool HasTeleported() const;
+    Vector2 Position() const;
+    int Heading() const;
+    Texture2D getTexture() const;
+
+    void Teleport(int x, int y, int heading);
+    void Forward(int n);
+    void Backward(int n);
+    void Turn(int n);
+    void PenUp();
+    void PenDown();
+};
+
+extern Karesz_t karesz;
 
 #endif
