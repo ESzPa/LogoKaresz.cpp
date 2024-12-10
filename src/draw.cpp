@@ -17,8 +17,8 @@ void WinDraw(){
     int fontsize = 30;
     int textsize = MeasureText("Start", 50);
     DrawText("Start", 1412-textsize/2, 62, 50, WHITE);
-    DrawText(std::to_string(karesz.Position().x).c_str(), 1250, 200, fontsize, BLACK);
-    DrawText(std::to_string(karesz.Position().y).c_str(), 1250, 250, fontsize, BLACK);
+    DrawText(std::to_string((int)karesz.Position().x).c_str(), 1250, 200, fontsize, BLACK);
+    DrawText(std::to_string((int)karesz.Position().y).c_str(), 1250, 250, fontsize, BLACK);
     DrawText(std::to_string(karesz.Heading()).c_str(), 1250, 300, fontsize, BLACK);
 
     for(std::vector<int> line : linescoords){

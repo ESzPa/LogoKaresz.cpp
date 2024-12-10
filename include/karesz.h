@@ -3,7 +3,6 @@
 #include <raylib.h>
 #include <stdexcept>
 #include <cmath>
-#include <memory>
 
 #include "draw.h"
 

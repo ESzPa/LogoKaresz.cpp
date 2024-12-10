@@ -3,7 +3,6 @@
 #include "draw.h"
 #include "constants.h"
 #include <raylib.h>
-#include <memory>
 
 Rectangle startbtn = {1250, 25, 325, 125};
 
