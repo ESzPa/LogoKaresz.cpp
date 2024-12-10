@@ -134,3 +134,6 @@ void Ív(double degree, double r){
 void Frissíts(bool should){
     shouldReDraw = should;
 }
+Pozicíó_t Pozicíó(){
+    return (Pozicíó_t){ karesz.Position().x, karesz.Position().y };
+}
