@@ -55,12 +55,32 @@ void Karesz_t::Forward(int n){
     float dy = std::sin(rad) * n;
     this->Move(this->x+(int)dx, this->y-(int)dy);
     if(this->pendown){
-        std::vector<int> _;
-        _.push_back(oldX);
-        _.push_back(oldY);
-        _.push_back(this->x);
-        _.push_back(this->y);
-        linescoords.push_back(_);  
+        // Bresenham's line algorithm 
+        int x0 = oldX;
+        int y0 = oldY;
+        int x1 = this->x;
+        int y1 = this->y;
+
+        int dx = std::abs(x1 - x0);
+        int dy = std::abs(y1 - y0);
+        int sx = (x0 < x1) ? 1 : -1;
+        int sy = (y0 < y1) ? 1 : -1; 
+        int err = dx - dy;
+
+        while (true) {
+            map.set(x0, y0, BLACK); 
+            if (x0 == x1 && y0 == y1) break; 
+
+            int e2 = 2 * err;
+            if (e2 > -dy) {
+                err -= dy;
+                x0 += sx;
+            }
+            if (e2 < dx) {
+                err += dx;
+                y0 += sy;
+            }
+        }
     }
     WinDraw();
 }

@@ -12,6 +12,7 @@ int main(){
     // X: 1175
     // Y: 925
     karesz.Init({600, 475}, 0, true, false, "../assets/karesz.png");
+    map.InitMap(mapWidth, mapHeight);
 
     while(!CheckCollisionPointRec(GetMousePosition(), startbtn) && !IsMouseButtonPressed(KEY_LEFT)){
         WinDraw();

@@ -1,7 +1,35 @@
 #include "draw.h"
 #include "karesz.h"
 
-std::vector<std::vector<int>> linescoords;
+void Map_t::InitMap(int width, int height){
+    this->width = width;
+    this->height = height;
+    this->image = GenImageColor(this->width, this->height, RAYWHITE);
+    this->texture = LoadTextureFromImage(this->image);
+}
+
+Map_t::~Map_t(){
+    UnloadImage(this->image);
+    UnloadTexture(this->texture);
+}
+
+bool Map_t::isInBounds(int x, int y) const {
+    return x >= 0 && x < this->width && y >= 0 && y < this->height;
+}
+
+void Map_t::set(int x, int y, Color color){
+    if(isInBounds(x, y)){
+        ImageDrawPixel(&this->image, x, y, color);
+    }
+    else{
+        throw std::runtime_error("Pixel drawn out of bounds.");
+    }
+}
+
+Texture2D Map_t::getTexture() { return this->texture; }
+void Map_t::updateTexture() { UpdateTexture(this->texture, this->image.data); }
+
+Map_t map;
 
 void WinDraw(){
     BeginDrawing();
@@ -9,8 +37,8 @@ void WinDraw(){
     ClearBackground({ 230, 230, 230, 255 });
 
     // Draw the map
-    DrawRectangle(23, 23, 1204, 954, LIGHTGRAY);
-    DrawRectangle(25, 25, 1200, 950, RAYWHITE);
+    DrawRectangle(mapX-2, mapY-2, mapWidth+4, mapHeight+4, LIGHTGRAY);
+    DrawRectangle(mapX, mapY, mapWidth, mapHeight, RAYWHITE);
 
     // Draw the sidebar
     DrawRectangle(1250, 25, 325, 125, GREEN);
@@ -21,9 +49,8 @@ void WinDraw(){
     DrawText(std::to_string((int)karesz.Position().y).c_str(), 1250, 250, fontsize, BLACK);
     DrawText(std::to_string(karesz.Heading()).c_str(), 1250, 300, fontsize, BLACK);
 
-    for(std::vector<int> line : linescoords){
-        DrawLine(line[0], line[1], line[2], line[3], BLACK);
-    }
+    map.updateTexture();
+    DrawTexture(map.getTexture(), mapX, mapY, WHITE);
 
     // Draw karesz with rotation
     Rectangle sourceRec = { 0.0f, 0.0f, (float)karesz.getTexture().width, (float)karesz.getTexture().height };
