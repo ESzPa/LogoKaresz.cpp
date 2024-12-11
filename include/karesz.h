@@ -3,6 +3,7 @@
 #include <raylib.h>
 #include <stdexcept>
 #include <cmath>
+#include <queue>
 
 #include "draw.h"
 
@@ -30,6 +31,7 @@ public:
     void Turn(int n);
     void PenUp();
     void PenDown();
+    void Fill();
 };
 
 extern Karesz_t karesz;

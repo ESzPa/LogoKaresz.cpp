@@ -27,7 +27,9 @@ void Map_t::set(int x, int y, Color color){
 }
 
 Texture2D Map_t::getTexture() { return this->texture; }
+Image Map_t::getImage() { return this->image; }
 void Map_t::updateTexture() { UpdateTexture(this->texture, this->image.data); }
+void Map_t::setImage(Image img) { this->image = img; }
 
 Map_t map;
 bool shouldReDraw = true;

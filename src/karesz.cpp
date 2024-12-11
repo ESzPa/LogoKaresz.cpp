@@ -110,6 +110,45 @@ void Karesz_t::PenDown(){
     this->pendown = true;
 }
 
+void Karesz_t::Fill(){
+    Color fillColor = BLACK;
+    int startX = this->x-25;
+    int startY = this->y-25;
+    Image tmpImg = map.getImage();
+    Color targetColor = GetImageColor(tmpImg, startX, startY);
+
+    if(fillColor.r == targetColor.r && fillColor.g == targetColor.g && fillColor.b == targetColor.b && fillColor.a == fillColor.a){
+        UnloadImage(tmpImg);
+        return;
+    }
+
+    std::queue<Vector2> pixels;
+    pixels.push((Vector2){startX, startY});
+
+    while (!pixels.empty()){
+        Vector2 current = pixels.front();
+        pixels.pop();
+
+        int x = current.x;
+        int y = current.y;
+        
+        if(x >= 0 && x < tmpImg.width && y >= 0 && y < tmpImg.height){
+            Color currentColor = GetImageColor(tmpImg, x, y);
+            if (currentColor.r == targetColor.r && currentColor.g == targetColor.g &&
+                currentColor.b == targetColor.b && currentColor.a == targetColor.a) {
+                ImageDrawPixel(&tmpImg, x, y, fillColor);
+                pixels.push((Vector2){(float)x + 1, (float)y});
+                pixels.push((Vector2){(float)x - 1, (float)y});
+                pixels.push((Vector2){(float)x, (float)y + 1});
+                pixels.push((Vector2){(float)x, (float)y - 1});
+            }
+        }
+    }
+    map.setImage(tmpImg);
+    UnloadImage(tmpImg);
+    WinDraw();
+}
+
 Karesz_t karesz;
 
 void Teleport(int x, int y, int heading) { karesz.Teleport(x, y, heading); }
@@ -135,5 +174,6 @@ void Frissíts(bool should){
     shouldReDraw = should;
 }
 Pozicíó_t Pozicíó(){
-    return (Pozicíó_t){ karesz.Position().x, karesz.Position().y };
+    return (Pozicíó_t){ (int)karesz.Position().x, (int)karesz.Position().y };
 }
+void Kitölt() { karesz.Fill(); }

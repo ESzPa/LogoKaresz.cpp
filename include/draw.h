@@ -24,7 +24,9 @@ public:
     bool isInBounds(int x, int y) const;
     void set(int x, int y, Color color);
     Texture2D getTexture();
+    Image getImage();
     void updateTexture();
+    void setImage(Image img);
 };
 
 extern Map_t map;

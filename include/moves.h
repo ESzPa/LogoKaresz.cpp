@@ -17,5 +17,6 @@ void Tollatfel();
 void Tollatle();
 void Frissíts(bool should);
 Pozicíó_t Pozicíó();
+void Kitölt();
 
 #endif
