@@ -48,10 +48,16 @@ void WinDraw(){
     DrawRectangle(1250, 25, 325, 125, GREEN);
     int fontsize = 30;
     int textsize = MeasureText("Start", 50);
+    std::string strX = "X: " + std::to_string((int)karesz.Position().x);
+    std::string strY = "Y: " + std::to_string((int)karesz.Position().y);
+    std::string strHeading = "Irány: " + std::to_string(karesz.Heading());
+    const char* textX = strX.c_str();
+    const char* textY = strY.c_str();
+    const char* textHeading = strHeading.c_str();
     DrawText("Start", 1412-textsize/2, 62, 50, WHITE);
-    DrawText(std::to_string((int)karesz.Position().x).c_str(), 1250, 200, fontsize, BLACK);
-    DrawText(std::to_string((int)karesz.Position().y).c_str(), 1250, 250, fontsize, BLACK);
-    DrawText(std::to_string(karesz.Heading()).c_str(), 1250, 300, fontsize, BLACK);
+    DrawText(textX, 1250, 200, fontsize, BLACK);
+    DrawText(textY, 1250, 250, fontsize, BLACK);
+    DrawText(textHeading, 1250, 300, fontsize, BLACK);
 
     map.updateTexture();
     DrawTexture(map.getTexture(), mapX, mapY, WHITE);
